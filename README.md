@@ -59,4 +59,4 @@ Contemplar los siguientes requerimientos:
   * `ImageFinder` debería poder manejar gran cantidad de links
   * Si la descarga de una imagen falla, se debería reintentar hasta 3 veces.
   * El proceso de descarga debería ser _polite_, es decir, no debería sobrecargar a los servidores de imágenes. Para eso, los links de un mismo dominio deberían ser descargado de a uno por vez. 
-  * Si la descarga de links del dominio falla frecuentemente (por ejemplo, más de 5 veces por minuto), se debería explucir al dominio del proceso de descarga
+  * Si la descarga de links del dominio falla frecuentemente (por ejemplo, más de 5 veces por minuto), se debería excluir al dominio del proceso de descarga
