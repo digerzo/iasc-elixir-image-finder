@@ -27,7 +27,9 @@ Este repositorio contiene el código de una aplicación `elixir/otp`, que permit
 Para ello, se expone un módulo `ImageFinder` y una función `fetch`, que toma la ruta del archivo de links y el directorio en el cual se descargarán. Ambas rutas pueden ser relativas al proyecto o absolutas. Por ejemplo: 
 
 ```elixir
-ImageFinder.fetch "sample.txt", "out"
+ImageFinder.fetch("sample2.txt", "./out")
+
+
 :ok
 ```
 
