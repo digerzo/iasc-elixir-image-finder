@@ -19,7 +19,8 @@ defmodule ImageFinder.Worker do
   end
 
   def fetch_link(link, target_directory) do
-    HTTPotion.get(link).body  |> save(target_directory)
+    {:ok, response} = Tesla.get(link)
+    response.body  |> save(target_directory)
   end
 
   def digest(body) do
