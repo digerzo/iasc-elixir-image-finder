@@ -14,7 +14,8 @@ defmodule ImageFinder do
     import Supervisor.Spec, warn: false
 
     children = [
-      ImageFinder.Supervisor
+      ImageFinder.Supervisor,
+      ImageFetcher.Supervisor
     ]
 
     opts = [strategy: :one_for_one, name: MegaSupervisor, max_seconds: 5, max_restarts: 3]
