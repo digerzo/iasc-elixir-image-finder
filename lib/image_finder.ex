@@ -15,7 +15,8 @@ defmodule ImageFinder do
 
     children = [
       ImageFinder.Supervisor,
-      ImageFetcher.Supervisor
+      ImageFetcher.Supervisor,
+      ImageSaver.Supervisor
     ]
 
     opts = [strategy: :one_for_one, name: MegaSupervisor, max_seconds: 5, max_restarts: 3]
