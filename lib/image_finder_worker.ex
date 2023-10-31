@@ -9,25 +9,11 @@ defmodule ImageFinder.Worker do
     {:ok, %{}}
   end
 
-  def handle_call({:fetch, source_file, target_directory}, _from, state) do
+  def handle_cast({:fetch, source_file, target_directory}, _from, state) do
     content = File.read! source_file
-    regexp = ~r/http(s?)\:.*?\.(png|jpg|gif)/
-    Regex.scan(regexp, content)
-      |> Enum.map(&List.first/1)
-      |> Enum.map(&(fetch_link &1, target_directory))
-    {:reply, :ok, state}
+    links = ImageFinder.Fetcher.extract_links(content)
+    ImageFinder.Saver.fetch_and_save_links(links, target_directory)
+    {:noreply, :ok, state}
   end
 
-  def fetch_link(link, target_directory) do
-    {:ok, response} = Tesla.get(link)
-    response.body  |> save(target_directory)
-  end
-
-  def digest(body) do
-    :crypto.hash(:md5 , body) |> Base.encode16()
-  end
-
-  def save(body, directory) do
-    File.write! "#{directory}/#{digest(body)}", body
-  end
 end

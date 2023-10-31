@@ -9,13 +9,14 @@ defmodule ImageFinder.Fetcher do
     {:ok, %{}}
   end
 
-    # def handle_cast({:fetch, source_file, target_directory}, _from, state) do
-    #   content = File.read! source_file
-    #   regexp = ~r/http(s?)\:.*?\.(png|jpg|gif)/
-    #   Regex.scan(regexp, content)
-    #     |> Enum.map(&List.first/1)
-    #     |> Enum.map(&(fetch_link &1, target_directory))
-    #   {:reply, :ok, state}
-    # end
+  def extract_links(content) do
+    regexp = ~r/http(s?)\:.*?\.(png|jpg|gif)/
+    Regex.scan(regexp, content)
+    |> Enum.map(&List.first/1)
+  end
+
+  def fetch(link) do
+    Tesla.get(link)
+  end
 
 end
